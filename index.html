@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Image generator</title>
+    <script src="./index.js" defer></script>
+
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+    <main class="image-generator">
+        <section>
+            <h1 class="image-generator__title">IMAGE GENERATOR</h1>
+            <hr class="hr">
+            <form id="form" method="GET" action="image-generator.php" enctype="multipart/form-data">
+                <div>
+                    <label for="width">Wysokość obrazka:</label>
+                    <br>
+                    <input type="number" name="width" min="100" max="900" value="200">
+                </div>
+
+                <div>
+                    <label for="height">Szerokość obrazka:</label>
+                    <br>
+                    <input type="number" name="height" min="100" max="900" value="200">
+                </div>
+
+                <div>
+                    <label for="text">Wpisz tekst:</label>
+                    <br>
+                    <textarea name="text" value="pry" maxlength="20"></textarea>
+                </div>
+
+                <div>
+                    <label for="color">Wybierz kolor tła:</label>
+                    <br>
+                    <input type="color" name="color" value="#c0c0c0">
+                </div>
+
+                <div>
+                    <label for="icon">Wybierz ikonkę:</label>
+                    <br>
+                    <select name="icon" id="iconList">
+                        <option value="wybierz" selected disabled>----</option>
+
+                    </select>
+                </div>
+
+                <div>
+                    <button type="submit">Gotowe!</button>
+                </div>
+            </form>
+
+            <hr class="hr">
+
+            <form id="newIcon" method="POST" action="custom-img.php" enctype="multipart/form-data">
+                <div>
+                    <label for="image">Możesz też dodać własną ikonkę:</label>
+                    <br>
+                    <input type="file" name="image">
+                </div>
+                <div>
+                    <button type="submit">Prześlij</button>
+                </div>
+            </form>
+            
+        </section>
+        <hr class="hr">
+        <section>
+            <h2 class="image-generator__preview preview__title">PREVIEW</h2>
+            <br>
+            <img id="preview" class="image-generator__preview preview__img"
+                src="./image.png?height=200&width=200&text=&color=%23c0c0c0&icon=wybierz"
+                alt="Podgląd obrazka">
+            </img>
+        </section>
+    </main>
+
+</body>
+
+</html>
