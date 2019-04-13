@@ -2,6 +2,50 @@ let imagePath = "./img/"
 const defaultHeight = document.querySelector('input[name="height"]').value
 const defaultWidth = document.querySelector('input[name="width"]').value
 const defaultColor = document.querySelector('input[name="color"]').value
+const iconStatus = document.querySelector("#status");
+const iconStatusText = document.querySelector("#status-info");
+let select = document.querySelector("#iconList")
+let selectedIcon = document.querySelector("#selected-icon")
+const imageURL = document.querySelector("#img-url")
+let URLElement = document.querySelector("#img-link")
+const previewImg = document.querySelector("#preview-img")
+
+
+iconStatusText.textContent = "Nie wybrano pliku.";
+
+function createSelect(optionValue, isDisabled, forWhat) {
+    // Generowanie <option>
+    let option = document.createElement("option")
+
+    // Path ikonki
+    let optionValueToAdd = "";
+
+    switch(forWhat) {
+        case 'usersImages': 
+        optionValueToAdd = 'user-img';
+        
+        break;
+        case 'nativeImages': 
+        optionValueToAdd = 'img';
+
+        break;
+        default:
+
+    }
+
+    const imgOutput = `./${optionValueToAdd}/${optionValue}`;
+    option.setAttribute("value", imgOutput)
+
+    option.textContent = optionValue;
+
+
+    if(isDisabled === true){
+        option.setAttribute("disabled", "true")
+        option.setAttribute("selected", "true")
+    }
+    select.appendChild(option)
+}
+
 
 let previewValues = {
     fileName: './image.png',
@@ -12,92 +56,165 @@ let previewValues = {
     icon: '',
 }
 
-let xhr = new XMLHttpRequest();
-xhr.open("GET", "./img-array.php", true);
 
-xhr.addEventListener('load', (e)=> {
-    const responseObj = e.target;
+let selectLoad = document.querySelector("#loading")
+selectLoad.textContent = "Trwa ładowanie ikonek..."
 
-    if (responseObj.status === 200) {
-        // Kiedy wszystko dziala poprawnie:
-        let response;
-        try { 
-            const parsedResponse = JSON.parse(responseObj.response)
-            response = parsedResponse;
-        } catch (error){
-            // Błąd na back endzie:
-            console.error("Wystąpił błąd parsowania danych.");
-        }
+function getIconList() {
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "./img-array.php", true);
 
+    xhr.addEventListener('load', (e) => {
+        const responseObj = e.target;
 
-        if (response && Array.isArray(response)) {
-            //Dodawanie <option> do <select>
-            let select = document.querySelector("#iconList")
-            for(let i=0; i<response.length; i++){
-                // Generowanie <option>
-                let option = document.createElement("option")
-                // Path ikonki
-                let imgOutput = imagePath + response[i]
-                option.setAttribute("value", imgOutput)
-                option.innerHTML = response[i]
-                select.appendChild(option)
+        selectLoad.textContent = "Wybierz ikonkę:"
+        if (responseObj.readyState === 4) {
+            // Kiedy wszystko dziala poprawnie:
+            let response;
+            try {
+                const parsedResponse = JSON.parse(responseObj.response)
+                response = parsedResponse;
+            } catch (error) {
+                // Błąd na back endzie:
+                console.error("Wystąpił błąd parsowania danych.");
             }
-            // Dodawanie domyślnego obrazka przed utworzeniem preview:
-            let preview = document.querySelector("#preview")
-            let allInputs = document.querySelectorAll("input[name], textarea[name], select")
 
-            for (const input of allInputs) {
-                input.addEventListener('input', (e) => {
-                    // Update obiektu previewValues o wartości z inputów
-                    switch(e.target.name){
-                        case "height":
-                        previewValues.height = e.target.value
-                        break;
+            if (response) {
+                //Dodawanie <option> do <select>
 
-                        case "width":
-                        previewValues.width = e.target.value
-                        break;
 
-                        case "text":
-                        previewValues.text= e.target.value
-                        break;
 
-                        case "color":
-                        previewValues.color= e.target.value
-                        break;
 
-                        case "icon":
-                        previewValues.icon= e.target.value
-                        break;
-                    }
-                    // Nowy src dodany do obrazka:
-                    let link = `${previewValues.fileName}?height=${previewValues.height}&width=${previewValues.width}&text=${previewValues.text}&color=${encodeURIComponent(previewValues.color)}&icon=${previewValues.icon}`
-                    preview.setAttribute("src", link)
+                select.textContent = "";
 
-                    // Wysyłanie REST do back-endu:
-                    let params = `height=${previewValues.height}&width=${previewValues.width}&text=${previewValues.text}&color=${encodeURIComponent(previewValues.color)}&icon=${previewValues.icon}`;
-                    let iconRequest = new XMLHttpRequest();
+                createSelect("-----", true)
 
-                    iconRequest.open("POST", "./img-array.php", true);
-                    iconRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+                let usersImages = response['userImages'];
+                let nativeImages = response['nativeImages'];
+
+                console.log(usersImages)
+                console.log(nativeImages)
+
+
+                if(Array.isArray(usersImages) && Array.isArray(nativeImages)) {
+
+           
     
-                    iconRequest.onreadystatechange = ()=> {
-                        if(iconRequest.readyState == 4 && iconRequest.status == 200) {
-                            console.log(iconRequest.responseText);
-                        }
+                    for (let i = 0; i < nativeImages.length; i++) {
+    
+                        createSelect(nativeImages[i], false, "nativeImages")
+    
                     }
-                    iconRequest.send(params);
-                })
+    
+                    for (let i = 0; i < usersImages.length; i++) {
+
+                        createSelect(usersImages[i], false, "usersImages" )
+    
+                    }
+                }
+
+
+
+                // Dodawanie domyślnego obrazka przed utworzeniem preview:
+                let preview = document.querySelector("#preview")
+                let allInputs = document.querySelectorAll("input[name], textarea[name], select")
+
+                for (const input of allInputs) {
+                    input.addEventListener('input', (e) => {
+                        // Update obiektu previewValues o wartości z inputów
+                        switch (e.target.name) {
+                            case "height":
+                                previewValues.height = e.target.value
+                                break;
+
+                            case "width":
+                                previewValues.width = e.target.value
+                                break;
+
+                            case "text":
+                                previewValues.text = e.target.value
+                                break;
+
+                            case "color":
+                                previewValues.color = e.target.value
+                                break;
+
+                            case "icon":
+                                previewValues.icon = e.target.value
+                                break;
+
+                            case "image":
+                                // Wysyłanie REST do back-endu:
+                                let fileToSend = e.target.files[0];
+                                let iconRequest = new XMLHttpRequest();
+
+                                
+                                iconRequest.open("POST", "./custom-img.php", true);
+                                iconRequest.onreadystatechange = () => {
+                                    if (iconRequest.readyState == 4) {
+
+                                        if (iconRequest.status >= 200 && iconRequest.status < 300) {                                            
+                                            iconStatusText.classList.add("status__text--success")
+                                            iconStatusText.textContent = "Udało się przesłać obrazek!"
+                                            // Dodawanie ikonki do listy
+                                            getIconList();
+
+                                        }
+                                    }  else {
+                                        iconStatusText.classList.remove("status__text--success")
+                                        iconStatusText.classList.add("status__text--error")
+                                        iconStatusText.textContent = "Wybierz plik o odpowiednim rozszerzeniu!"
+                                    }
+                                }
+
+                                let formData = new FormData();
+                                formData.append("image", fileToSend);
+                                iconRequest.send(formData);
+
+
+                                iconStatus.appendChild(iconStatusText);
+                                // Tworzenie BLOB:
+                       
+                                let iconBlob = new Blob([fileToSend], {type: "image/png"});
+                                let blobURL = URL.createObjectURL(iconBlob);
+
+                                previewImg.setAttribute('src', blobURL)
+
+                                break;
+
+                            default:
+                                console.warn("Brak obslugi dla inputa ", e.target.name)
+                                return;
+                        }
+                        let link = `${previewValues.fileName}?height=${previewValues.height}&width=${previewValues.width}&text=${previewValues.text}&color=${encodeURIComponent(previewValues.color)}&icon=${previewValues.icon}`
+
+                        // Nowy src dodany do obrazka:
+                        preview.setAttribute("src", link)
+                        selectedIcon.setAttribute("src", previewValues.icon)
+
+                        // Wyświetlanie linku do zdjęcia:
+                        imageURL.classList.remove("img-url--hidden")
+                        imageURL.classList.add("img-url--visible")
+
+                    // Wyświetlanie linka do obrazka:
+                    URLElement.setAttribute("href", link)
+
+                    imageURL.appendChild(URLElement)
+                    URLElement.textContent = link;
+                    })
+                }
+
+
             }
-            // const newIcon = document.querySelector("#newIcon");
-            // newIcon.addEventListener("submit", (e) => {
-
-
-            // })
-
-
         }
-    }
-});
- 
-xhr.send();
+    });
+
+    xhr.send();
+}
+getIconList();                        
+
+
+
+
+console.log = () => {}

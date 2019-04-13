@@ -1,0 +1,133 @@
+
+.html {
+    background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+    font-size:76.5%;
+
+}
+
+.image-generator {
+    background-color: whitesmoke;
+    opacity: 0.99;
+
+    &__title {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+
+}
+
+
+
+
+/* Stylowanie przerwy: */
+.hr { 
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+
+
+
+/* Stylowanie formularza: */
+
+//STYLE PO TAGACH!!! FUJ!!!!!!!
+input {
+    &[type=number] {
+        border: none;
+        border-bottom: 2px solid palevioletred;
+      }
+        
+    &[type=color] {
+        border: none;
+    }
+
+}
+
+
+//STYLE PO TAGACH!!! FUJ!!!!!!!
+.div {
+    padding: 7px;
+}
+
+.selected-icon {
+    border: 1px solid black;
+    width: 80px;
+    height: 80px;
+}
+
+.preview {
+    &__title {
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    &__img {
+        border: 1px black dashed;
+        margin: 5px;
+    }
+}
+
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.form-button {
+    cursor: pointer;
+    color: rgb(160, 26, 71);
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    border-bottom: 2px solid palevioletred;
+}
+
+
+.status {
+    &__text {
+        font-weight: bold;
+
+        &--error{color: red;}
+        &--success{color: green;}
+    }
+}
+
+
+.img-url {
+    border: 1px solid black;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: all 0.5s ease;
+
+    &:hover {
+        white-space: normal;
+        background-color: rgb(150, 150, 150);
+        text-overflow: unset;
+        overflow: visible;
+    }
+
+    &--hidden {
+        opacity: 0;
+    }
+
+    &--visible {
+        opacity: 1;
+    }
+
+    &__link {
+        color: rgb(61, 61, 61);
+        background-color: rgb(209, 209, 209);
+    }
+}
+
+
+
+.preview-img {
+    max-width: 300px;
+}

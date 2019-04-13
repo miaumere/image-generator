@@ -1,50 +1,115 @@
-
 .html {
-    background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+  background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+  font-size: 76.5%;
 }
 
 .image-generator {
-    background-color: whitesmoke;
-    opacity: 0.99;
-
+  background-color: whitesmoke;
+  opacity: 0.99;
 }
+
 .image-generator__title {
-    font-size: 2rem;
-    text-align: center;
+  font-size: 3rem;
+  text-align: center;
 }
-
 
 /* Stylowanie przerwy: */
-.hr { 
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+.hr {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(rgba(0, 0, 0, 0.75)), to(rgba(0, 0, 0, 0)));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
 /* Stylowanie formularza: */
-input {
-    border: none;
-    border-bottom: 2px solid palevioletred;
-  }
+input[type=number] {
+  border: none;
+  border-bottom: 2px solid palevioletred;
+}
 
 input[type=color] {
-    border: none;
-  }
+  border: none;
+}
 
-label {
-    font-size: 0.8rem;
+.div {
+  padding: 7px;
 }
-div {
-    padding: 7px;
+
+.selected-icon {
+  border: 1px solid black;
+  width: 80px;
+  height: 80px;
 }
+
 .preview__title {
-    font-weight: bold;
-    font-size: 1.2rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
 }
+
 .preview__img {
-    border: 1px black dashed;
+  border: 1px black dashed;
+  margin: 5px;
 }
+
 .error {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
+
+.form-button {
+  cursor: pointer;
+  color: #a01a47;
+  padding: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  border-bottom: 2px solid palevioletred;
+}
+
+.status__text {
+  font-weight: bold;
+}
+
+.status__text--error {
+  color: red;
+}
+
+.status__text--success {
+  color: green;
+}
+
+.img-url {
+  border: 1px solid black;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.img-url:hover {
+  white-space: normal;
+  background-color: #969696;
+  text-overflow: unset;
+  overflow: visible;
+}
+
+.img-url--hidden {
+  opacity: 0;
+}
+
+.img-url--visible {
+  opacity: 1;
+}
+
+.img-url__link {
+  color: #3d3d3d;
+  background-color: #d1d1d1;
+}
+
+.preview-img {
+  max-width: 300px;
+}
+/*# sourceMappingURL=style.css.map */

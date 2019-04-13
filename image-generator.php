@@ -1,6 +1,6 @@
 <?php
  // Nagłówek wskazujący na typ zawartości:
-// header('Content-type: image/png');
+header('Content-type: image/png');
 header("Access-Control-Allow-Origin: *");
 
 // Wartości z GET:
