@@ -1,7 +1,7 @@
 <?php
  // Nagłówek wskazujący na typ zawartości:
-header('Content-type: image/png');
-header("Access-Control-Allow-Origin: *");
+header ('Content-Type: image/png');
+header('Access-Control-Allow-Origin: *');
 
 // Wartości z GET:
 
@@ -18,8 +18,10 @@ header("Access-Control-Allow-Origin: *");
     // Ikonka: 
     $iconInput = isset($_GET['icon']) ? $_GET['icon'] : '';
 
+
+
     // Dodawanie czcionki:
-    $font = dirname(__FILE__) . '/visitor2.ttf';
+    $font = getcwd() . '\visitor2.ttf';
     $im = imagecreate((int)$height, (int)$width);
 
     // Stałe dot. koloru tekstu:

@@ -1,4 +1,7 @@
-let imagePath = "./img/"
+let imagePath = "../img/"
+let imgArrayPath = "./api/img-array.php"
+let customImg = "./api/custom-img.php"
+
 const defaultHeight = document.querySelector('input[name="height"]').value
 const defaultWidth = document.querySelector('input[name="width"]').value
 const defaultColor = document.querySelector('input[name="color"]').value
@@ -24,7 +27,7 @@ function createSelect(optionValue, isDisabled, forWhat) {
         case 'usersImages': 
         optionValueToAdd = 'user-img';
         
-        break;
+        break; 
         case 'nativeImages': 
         optionValueToAdd = 'img';
 
@@ -48,7 +51,7 @@ function createSelect(optionValue, isDisabled, forWhat) {
 
 
 let previewValues = {
-    fileName: './image.png',
+    fileName: './api/image-generator.php',
     height: defaultHeight,
     width: defaultWidth,
     text: '',
@@ -62,7 +65,7 @@ selectLoad.textContent = "Trwa ładowanie ikonek..."
 
 function getIconList() {
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", "./img-array.php", true);
+    xhr.open("GET", imgArrayPath, true);
 
     xhr.addEventListener('load', (e) => {
         const responseObj = e.target;
@@ -150,7 +153,7 @@ function getIconList() {
                                 let iconRequest = new XMLHttpRequest();
 
                                 
-                                iconRequest.open("POST", "./custom-img.php", true);
+                                iconRequest.open("POST", customImg, true);
                                 iconRequest.onreadystatechange = () => {
                                     if (iconRequest.readyState == 4) {
 
@@ -193,15 +196,6 @@ function getIconList() {
                         preview.setAttribute("src", link)
                         selectedIcon.setAttribute("src", previewValues.icon)
 
-                        // Wyświetlanie linku do zdjęcia:
-                        imageURL.classList.remove("img-url--hidden")
-                        imageURL.classList.add("img-url--visible")
-
-                    // Wyświetlanie linka do obrazka:
-                    URLElement.setAttribute("href", link)
-
-                    imageURL.appendChild(URLElement)
-                    URLElement.textContent = link;
                     })
                 }
 

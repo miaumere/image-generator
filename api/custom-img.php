@@ -2,7 +2,7 @@
 
 // Maksymalna wielkość obrazka:
 $max_size = 1024 * 1024;
-$fileFolder = './user-img/';
+$fileFolder = '../user-img/';
 
 
 
@@ -21,7 +21,7 @@ if (isset($_FILES['image'])) {
     if ($file_size > $max_size) {
         header("HTTP/1.0 500 Internal Server Error");
     } else {
-        $fileFolder = './user-img/';
+        $fileFolder = '../user-img/';
 
         move_uploaded_file($file_tmp, $fileFolder . $file_name);
     };

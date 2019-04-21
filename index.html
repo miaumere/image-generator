@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Image generator</title>
 
-    <script src="./index.js" defer></script>
+    <script src="./api/index.js" defer></script>
 
-    <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
 
 </head>
 
@@ -18,7 +18,7 @@
         <section>
             <h1 class="image-generator__title">IMAGE GENERATOR</h1>
             <hr class="hr">
-            <form id="form" method="GET" action="image-generator.php" enctype="multipart/form-data">
+            <form id="form" method="GET" action="./api/image-generator.php" enctype="multipart/form-data">
                 <div class="div">
                     <label for="width">Wysokość obrazka:</label>
                     <br>
@@ -83,13 +83,9 @@
             <h2 class="image-generator__preview preview__title">PREVIEW</h2>
             <br>
             <img id="preview" class="image-generator__preview preview__img"
-                src="./image.png?height=200&width=200&text=&color=%23c0c0c0&icon=wybierz"
+                src="./api/image-generator.php?height=200&width=200&text=&color=%23c0c0c0&icon=wybierz"
                 alt="Podgląd obrazka">
             </img>
-            <div id="img-url" class="img-url img-url--hidden div">Link do obrazka:
-                <br>
-                <a href="" id="img-link" class="img-url__link"></a>
-            </div>
 
         </section>
     </main>
