@@ -16,9 +16,7 @@ header('Access-Control-Allow-Origin: *');
     $hexInput = urldecode($_GET['color']);
 
     // Ikonka: 
-    $iconInput = isset($_GET['icon']) ? $_GET['icon'] : '';
-
-
+    $iconInput = isset($_GET['icon']) ? '../' . $_GET['icon'] : '';
 
     // Dodawanie czcionki:
     $font = getcwd() . '\visitor2.ttf';
