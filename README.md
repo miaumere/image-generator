@@ -4,7 +4,7 @@ Głównym celem projektu była nauka PHP, AJAX i biblioteki GD.
 Aplikacja automatycznie tworzy sygnaturkę według pomysłu użytkownika.
 
 _The main goal of above-mentioned project was learning and practicing PHP, AJAX and GD Library. 
-App automatically generates a custom signature. _
+App automatically generates a custom signature._
 
 ![Preview](https://github.com/miaumere/portfolio/blob/master/img/img-gen.PNG?raw=true"Preview")
 
@@ -28,8 +28,8 @@ Final output is made up of short text, color and small icon chosen by user._
 * weryfikacja przesłanych obrazków przez użytkowników (złośliwe oprogramowania, obraźliwe obrazki) / _validation of icons sent by users (malware, offensive images)_
 * możliwość ustawiania pozycji i wielkości obrazka ikonki / _capability to change position and image size_
 * możliwość dodania więcej niż jednej ikonki / _support for more fonts_
-* formatowanie tekstu (wielkość, obramowanie) / _text formatting (e.g. size, stroke)
-* możliwość podłączenia tekstu do API zewnętrznego (nie tylko statycznie) / _ API management_
+* formatowanie tekstu (wielkość, obramowanie) / _text formatting (e.g. size, stroke)_
+* możliwość podłączenia tekstu do API zewnętrznego (nie tylko statycznie) / _API management_
 
 ## Przykłady użycia / _Examples_ :
 ![Example 1](https://meowmere.art/preview-images/1.png)
@@ -37,4 +37,5 @@ Final output is made up of short text, color and small icon chosen by user._
 
 
 Zachęcam do code review!
+
 _Feel free to code review!_
